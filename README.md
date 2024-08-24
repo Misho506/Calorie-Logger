@@ -15,3 +15,8 @@
 and then run again
 
 `npx sequelize-cli db:migrate`
+
+
+## Run the server
+
+`node ./app.js`
