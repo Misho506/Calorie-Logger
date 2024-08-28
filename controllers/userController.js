@@ -5,17 +5,15 @@ import asyncHandler from 'express-async-handler';
 const getAllUsers = asyncHandler(async (req, res) => {
   try {
     const users = await UserModel.findAll();
-    console.log("Users --------------", users);
     res.json(users);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: error.message });
   }
 });
 
 // Controller method to create a new user
 const createUser = asyncHandler(async (req, res) => {
   const { email, userName, password, lastName, firstName } = req.body;
-  console.log("=======", req.body)
   try {
     const newUser = await UserModel.create({
       email,
@@ -26,9 +24,8 @@ const createUser = asyncHandler(async (req, res) => {
     });
     res.status(201).json(newUser);
   } catch (error) {
-    console.log("---------   ERROR ---------", error);
-    res.status(500).json({ error: 'Internal Server Error' });
-    throw new Error(`Invalid credentials "PASS" ${JSON.stringify(req.body)}`);
+    res.status(500).json({ error: error.message });
+    throw new Error(error.message);
   }
 });
 

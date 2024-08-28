@@ -1,6 +1,7 @@
 import express from "express";
 import db from "./config/database.js";
 import userRoutes from "./routes/userRoutes.js";
+import caloriesRoutes from "./routes/caloriesRoutes.js";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false })) //Middleware
 
 app.use('/api/users', userRoutes)
+app.use('/api/calories', caloriesRoutes)
 
 
 app.listen(PORT, () => {

@@ -7,9 +7,9 @@ class UserModel extends Model {
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate({ UserModel, CaloriesPerDayModel }) {
+  static associate({ UserModel, CaloriesModel }) {
     // define association here
-    UserModel.hasMany(CaloriesPerDayModel, {
+    UserModel.hasMany(CaloriesModel, {
       foreignKey: 'userId',
     });
   }

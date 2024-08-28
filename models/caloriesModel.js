@@ -1,18 +1,18 @@
-import { Model } from 'sequelize';
+import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/database.js';
 
-class CaloriesPerDayModel extends Model {
+class CaloriesModel extends Model {
   /**
    * Helper method for defining associations.
    * This method is not a part of Sequelize lifecycle.
    * The `models/index` file will call this method automatically.
    */
-  static associate({ CaloriesPerDayModel, UserModel }) {
+  static associate({ CaloriesModel, UserModel }) {
     // define association here
-    CaloriesPerDayModel.userId = CaloriesPerDayModel.belongsTo(UserModel);
+    CaloriesModel.userId = CaloriesModel.belongsTo(UserModel);
   }
 }
-CaloriesPerDayModel.init({
+CaloriesModel.init({
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
@@ -27,7 +27,7 @@ CaloriesPerDayModel.init({
   },
 }, {
   sequelize,
-  modelName: 'CaloriesPerDayModel',
+  modelName: 'Calories',
 });
 
-export default CaloriesPerDayModel;
+export default CaloriesModel;
