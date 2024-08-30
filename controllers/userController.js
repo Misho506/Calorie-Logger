@@ -1,32 +1,35 @@
-import User from '../models/user.js';
+import UserModel from '../models/userModel.js';
+import asyncHandler from 'express-async-handler';
+
 // Controller method to get all user
-const getAllUsers = async (req, res) => {
+const getAllUsers = asyncHandler(async (req, res) => {
   try {
-    const users = await User.findAll();
+    const users = await UserModel.findAll();
     res.json(users);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: error.message });
   }
-}
+});
 
 // Controller method to create a new user
-const createUser = async (req, res) => {
-  const { email, userName, password, name, lastName } = req.body;
+const createUser = asyncHandler(async (req, res) => {
+  const { email, userName, password, lastName, firstName } = req.body;
   try {
-    const newUser = await User.create({
+    const newUser = await UserModel.create({
       email,
       userName,
       password,
-      name,
-      lastName
+      lastName,
+      firstName
     });
     res.status(201).json(newUser);
   } catch (error) {
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: error.message });
+    throw new Error(error.message);
   }
-};
+});
 
-export default {
+export {
   getAllUsers,
   createUser
 };

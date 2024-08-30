@@ -1,11 +1,11 @@
 import { Router } from 'express';
-import UserController from '../controllers/userController.js';
+import { getAllUsers, createUser } from '../controllers/userController.js';
 
-const router = Router();
+const userRoutes = Router();
 // Route to get all user
-router.get('/', UserController.getAllUsers);
+userRoutes.get('/getAll', getAllUsers);
 
 // Route to create a new todo
-router.post('/newUser', UserController.createUser);
+userRoutes.post('/newUser', createUser);
 
-export default router;
+export default userRoutes;
