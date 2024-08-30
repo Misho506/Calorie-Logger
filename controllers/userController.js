@@ -29,7 +29,20 @@ const createUser = asyncHandler(async (req, res) => {
   }
 });
 
+// Controller method to find an user by Id
+const findUserById = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await UserModel.findOne({ where: { id } });
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    throw new Error(error.message);
+  }
+})
+
 export {
   getAllUsers,
-  createUser
+  createUser,
+  findUserById
 };
