@@ -30,15 +30,14 @@ const createUser = asyncHandler(async (req, res) => {
 });
 
 // Controller method to delete a user by ID
-
 const deleteUser = asyncHandler(async (req, res) =>  {
-  const {id} = req.params;
+  const { id } = req.params;
 
   try {
     await UserModel.destroy({
       where: { id },
     });
-    
+
     res.status(200).send(`User deleted with ID: ${id}`)
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -49,7 +48,7 @@ const deleteUser = asyncHandler(async (req, res) =>  {
 // Controller method to update a user by ID
 const updateUserbyID = asyncHandler(async (req, res) => {
   const { email, userName, password, lastName, firstName } = req.body;
-  const {id} = req.params;
+  const { id } = req.params;
 
   try {
     const numUpdated = await UserModel.update(
