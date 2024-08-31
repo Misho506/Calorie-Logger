@@ -37,8 +37,23 @@ const deleteUser = asyncHandler(async (req, res) =>  {
     await UserModel.destroy({
       where: { id },
     });
-
     res.status(200).send(`User deleted with ID: ${id}`)
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+    throw new Error(error.message);
+  }
+})
+
+// Controller method to find an user by Id
+const findUserById = asyncHandler(async (req, res) => {
+  const { id } = req.body;
+  try {
+    const user = await UserModel.findOne({ where: { id } });
+    if (user) {
+      res.json(user);
+    } else {
+      throw new Error(`Invalid id, id: ${id}`);
+    }
   } catch (error) {
     res.status(500).json({ error: error.message });
     throw new Error(error.message);
@@ -69,5 +84,6 @@ export {
   getAllUsers,
   createUser,
   deleteUser,
-  updateUserbyID
+  updateUserbyID,
+  findUserById
 };
