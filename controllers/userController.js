@@ -20,7 +20,7 @@ const createUser = asyncHandler(async (req, res) => {
       userName,
       password,
       lastName,
-      firstName
+      firstName: firstaName
     });
     res.status(201).json(newUser);
   } catch (error) {
